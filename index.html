@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRICFy TV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            background-color: #444;
+            padding: 10px 0;
+        }
+        .tab {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background-color: #222;
+            color: #fff;
+            cursor: pointer;
+        }
+        .tab.active {
+            background-color: #007bff;
+        }
+        .content {
+            padding: 20px;
+        }
+        .match {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        .match .team {
+            display: flex;
+            align-items: center;
+        }
+        .match .team img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .match .status {
+            color: #ff0000;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer div {
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Mayank TV</div>
+    <div class="tabs">
+        <div class="tab active">All (1)</div>
+        <div class="tab">Live (1)</div>
+        <div class="tab">Recent (0)</div>
+        <div class="tab">Upcoming (0)</div>
+    </div>
+    <div class="content">
+        <a href="index2.html" class="match">
+            <div class="team">
+                <img src="image.png" alt="Afghanistan">
+                <span>Afghanistan</span>
+            </div>
+            <div class="status">Live</div>
+            <div class="team">
+                <span>England</span>
+                <img src="england.png" alt="England">
+            </div>
+        </a>
+    </div>
+    <div class="footer">
+        <div>Live Events</div>
+        <div>Sports</div>
+        <div>Categories</div>
+    </div>
+</body>
+</html>
