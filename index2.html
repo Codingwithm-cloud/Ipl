@@ -1,130 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plyr Video Player with Quality Change</title>
-  <!-- Plyr CSS -->
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-  <style>
-    html, body {
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      overflow: hidden; /* Prevent scrolling */
-    }
-    .container {
-      width: 100%;
-      height: 100%;
-      background-color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    video {
-      width: 100%;
-      height: 100%;
-      max-width: 800px; /* Adjust as needed */
-      max-height: 450px; /* Adjust as needed */
-    }
-    /* Ensure fullscreen mode works correctly */
-    .plyr--fullscreen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1000;
-    }
-    /* Fix for fullscreen mode */
-    .plyr--fullscreen video {
-      width: 100% !important;
-      height: 100% !important;
-      max-width: none !important;
-      max-height: none !important;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRICFy TV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            background-color: #444;
+            padding: 10px 0;
+        }
+        .tab {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background-color: #222;
+            color: #fff;
+            cursor: pointer;
+        }
+        .tab.active {
+            background-color: #007bff;
+        }
+        .content {
+            padding: 20px;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer div {
+            text-align: center;
+            cursor: pointer;
+        }
+        #player {
+            width: 100%;
+            height: 360px;
+            background-color: #000;
+        }
+    </style>
+    <script src="https://ssl.p.jwpcdn.com/player/v/8.22.0/jwplayer.js"></script>
 </head>
 <body>
-  <div class="container">
-    <video id="videoPlayer" controls crossorigin playsinline poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-      <!-- Replace with your M3U8 link -->
-      <source src="https://live.drmlive-02.workers.dev/jc/122.m3u8" type="application/x-mpegURL">
-      <!-- Fallback for browsers that don't support the <video> element -->
-      <a>Video Oynatılamıyor</a>
-    </video>
-  </div>
-
-  <!-- Plyr JavaScript -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-  <!-- hls.js library for HLS playback -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script>
-    // Get the video element
-    const video = document.getElementById('videoPlayer');
-
-    // Initialize Plyr player
-    const player = new Plyr(video, {
-      controls: [
-        'play-large', // The large play button in the center
-        'play', // Play/pause playback
-        'progress', // The progress bar and scrubber
-        'current-time', // The current time of playback
-        'duration', // The full duration of the media
-        'mute', // Toggle mute
-        'volume', // Volume control
-        'captions', // Toggle captions
-        'settings', // Settings menu (customized to exclude speed)
-        'pip', // Picture-in-picture (currently Safari only)
-        'airplay', // Airplay (currently Safari only)
-        'fullscreen', // Toggle fullscreen
-      ],
-      // Disable quality settings for HLS (not applicable)
-      quality: {
-        default: 480,
-        options: [144, 360, 480, 720, 1080],
-        forced: false, // Disable forced quality selection
-      },
-      // Customize settings menu to exclude speed option
-      settings: ['quality'],
-    });
-
-    // Check if HLS is supported natively by the browser
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      // Load the M3U8 link
-      hls.loadSource('https://live.drmlive-02.workers.dev/jc/122.m3u8');
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        video.play();
-      });
-    }
-    // Fallback to native HLS support (e.g., Safari)
-    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = 'https://live.drmlive-02.workers.dev/jc/122.m3u8';
-      video.addEventListener('loadedmetadata', function () {
-        video.play();
-      });
-    }
-
-    // Automatically switch to landscape mode when entering fullscreen
-    player.on('enterfullscreen', () => {
-      if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock('landscape').catch(() => {
-          console.warn('Screen orientation lock not supported');
+    <div class="header">Mayank TV</div>
+    <div class="tabs">
+        <div class="tab">All (1)</div>
+        <div class="tab active">Live (1)</div>
+        <div class="tab">Recent (0)</div>
+        <div class="tab">Upcoming (0)</div>
+    </div>
+    <div class="content">
+        <div id="player"></div>
+    </div>
+    <div class="footer">
+        <div>Live Events</div>
+        <div>Sports</div>
+        <div>Categories</div>
+    </div>
+    <script>
+        var jwp = jwplayer('player');
+        jwp.setup({
+            width: "100%",
+            title: "Valerian ve Bin Gezegen İmparatorluğu",
+            height: "360px",
+            key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=",
+            sources: [
+                { file: "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740995997~acl=%2f*~id=67a8e53c0853488f0ef6964cf6c49b94~data=hdntl~hmac=448e69db30d14f23269c5e23296f8ac6c362c25eec759bd131d4177bee509996/index.m3u8", type: "mp4", label: "480p", default: true },
+                { file: "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740995997~acl=%2f*~id=67a8e53c0853488f0ef6964cf6c49b94~data=hdntl~hmac=448e69db30d14f23269c5e23296f8ac6c362c25eec759bd131d4177bee509996/index.m3u8", type: "mp4", label: "720p" },
+                { file: "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740995997~acl=%2f*~id=67a8e53c0853488f0ef6964cf6c49b94~data=hdntl~hmac=448e69db30d14f23269c5e23296f8ac6c362c25eec759bd131d4177bee509996/index.m3u8", type: "mp4", label: "1080p" }
+            ],
+            image: "https://cdn-w1.netlify.com/cagatayldzz.com/2020/pbgRkz.jpg",
+            sharing: {
+                heading: "Paylaş",
+                link: "link-url",
+                sites: ["facebook", "twitter", "googleplus", "tumblr", "pinterest", "reddit", "linkedin", "email"]
+            },
+            primary: "html5"
         });
-      }
-    });
-
-    // Revert to portrait mode when exiting fullscreen
-    player.on('exitfullscreen', () => {
-      if (screen.orientation && screen.orientation.unlock) {
-        screen.orientation.unlock();
-      }
-    });
-
-    // Expose player to the global window object for debugging
-    window.player = player;
-  </script>
+    </script>
 </body>
 </html>
