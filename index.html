@@ -36,30 +36,54 @@
         }
         .content {
             padding: 20px;
+            display: flex;
+            justify-content: center;
         }
-        .match {
+        .div-container {
+            background-color: #282828;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px; /* Reduced width */
+            border: 2px solid #008000;
+            margin-bottom: 20px;
+            cursor: pointer; /* Added cursor pointer for clickable effect */
+        }
+
+        .div-container h2 {
+            margin-top: 0;
+            font-size: 1.2em; /* Reduced font size */
+        }
+
+        .div-container .match-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #222;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
+            margin-bottom: 15px; /* Reduced margin */
         }
-        .match .team {
+
+        .div-container .match-info .team {
             display: flex;
+            flex-direction: column;
             align-items: center;
         }
-        .match .team img {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
+
+        .div-container .match-info .team img {
+            width: 40px; /* Reduced image size */
+            height: 40px;
+            border-radius: 50%;
+            margin-bottom: 5px;
         }
-        .match .status {
-            color: #ff0000;
+
+        .div-container .time-date {
+            font-size: 1em; /* Reduced font size */
+            margin-bottom: 8px; /* Reduced margin */
+        }
+
+        .div-container .status {
+            font-style: italic;
+            font-size: 0.9em; /* Reduced font size */
         }
         .footer {
             display: flex;
@@ -85,18 +109,25 @@
         <div class="tab">Upcoming (0)</div>
     </div>
     <div class="content">
-        <a href="index2.html" class="match">
-            <div class="team">
-                <img src="image.jpg" alt="India">
-                <span>India</span>
+        <a href="index2.html" style="text-decoration: none; color: inherit;"> <div class="div-container">
+                <h2>Semi Final | ICC Champions Trophy 2025</h2>
+                <div class="match-info">
+                    <div class="team">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/2560px-Flag_of_India.svg.png" alt="India Flag">
+                        <span>India</span>
+                    </div>
+                    <div class="team">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Flag_of_Australia_(converted).svg/1280px-Flag_of_Australia_(converted).svg.png" alt="Australia Flag">
+                        <span>Australia</span>
+                    </div>
+                </div>
+                <div class="time-date">
+                    02:30 PM <br>
+                    04/03/2025
+                </div>
+                <div class="status">Match Starting Soon <a href="#">Live</a></div>
             </div>
-            <div class="status">Live</div>
-            <div class="team">
-                <span>New Zealand</span>
-                <img src="england.png" alt="New Zealand">
-            </div>
-        </a>
-    </div>
+        </a> </div>
     <div class="footer">
         <div>Live Events</div>
         <div>Sports</div>
